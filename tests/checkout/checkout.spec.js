@@ -25,6 +25,11 @@ test('user can complete checkout', async ({ page }) => {
   await cart.checkout();
 
   // Fill Customer Info
+
+  // Verify error for empty fields
+  // Test invalid zip code
+  // Verify total price matches items added
+  // Verify user is redirected to cart after clicking Cancel
   await checkout.fillCustomerInfo('Mike', 'Hudson', '12345');
   await checkout.finishCheckout();
 
