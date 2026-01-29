@@ -2,8 +2,36 @@ const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../../pages/LoginPage');
 const { users } = require('../../utils/users');
 const invalidUsers = [
-  { username: 'wrong_user', password: 'secret_sauce', description: 'incorrect username' },
-  { username: 'standard_user', password: 'wrong_password', description: 'incorrect password' },
+  {
+    username: 'wrong_user',
+    password: 'secret_sauce',
+    description: 'incorrect username',
+    expectedError: 'Epic sadface: Username and password do not match any user in this service',
+  },
+  {
+    username: 'standard_user',
+    password: 'wrong_password',
+    description: 'incorrect password',
+    expectedError: 'Epic sadface: Username and password do not match any user in this service',
+  },
+  {
+    username: '',
+    password: 'secret_sauce',
+    description: 'missing username',
+    expectedError: 'Epic sadface: Username is required',
+  },
+  {
+    username: 'standard_user',
+    password: '',
+    description: 'missing password',
+    expectedError: 'Epic sadface: Password is required',
+  },
+  {
+    username: '',
+    password: '',
+    description: 'missing username and password',
+    expectedError: 'Epic sadface: Username is required',
+  },
 ];
 
 invalidUsers.forEach(({ username, password, description }) => {
