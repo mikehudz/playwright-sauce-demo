@@ -34,14 +34,14 @@ const invalidUsers = [
   },
 ];
 
-invalidUsers.forEach(({ username, password, description }) => {
+invalidUsers.forEach(({ username, password, description, expectedError }) => {
   test(`login fails with ${description}`, async ({ page }) => {
     const login = new LoginPage(page);
     await login.goto();
     await login.login(username, password);
 
     const error = page.locator('[data-test="error"]');
-    await expect(error).toHaveText(/Epic sadface/i);
+    await expect(error).toHaveText(expectedError);
   });
 });
 
