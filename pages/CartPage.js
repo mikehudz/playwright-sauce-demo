@@ -1,0 +1,11 @@
+class CartPage {
+  constructor(page) {
+    this.page = page;
+  }
+
+  async checkout() {
+    await this.page.getByRole('button', { name: 'Checkout' }).click();
+  }
+}
+
+module.exports = { CartPage };
